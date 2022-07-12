@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import NavBar from './components/NavBar';
+import { getOneGameInfo } from '../src/store/game';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -9,7 +8,7 @@ function App() {
 
   useEffect(() => {
     (async() => {
-      setLoaded(true);
+      await dispatch(getOneGameInfo()).then(() => setLoaded(true));
     })();
   }, [dispatch]);
 
@@ -18,14 +17,9 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <NavBar />
-      <Switch>
-        <Route path='/' exact={true} >
-          <h1>My Home Page</h1>
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <div>
+      
+    </div>
   );
 }
 
