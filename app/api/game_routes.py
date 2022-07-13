@@ -68,10 +68,10 @@ def continue_game():
     data = request.json
     card_1 = Card.query.get(data["card_1"])
     card_1.played = False
-    card_1.updated = datetime.now()
+    card_1.updated = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     card_2 = Card.query.get(data["card_2"])
     card_2.played = False
-    card_2.updated = datetime.now()
+    card_2.updated = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     if card_1.value > card_2.value:
         card_1.player_id = 1

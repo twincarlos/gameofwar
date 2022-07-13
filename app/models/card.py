@@ -24,5 +24,5 @@ class Card(db.Model):
             "played": self.played,
             "war": self.war,
             "image": self.image,
-            "updated": self.updated
+            "updated": self.updated.strftime("%Y-%m-%d %H:%M:%S")
         }
