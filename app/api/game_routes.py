@@ -2,6 +2,7 @@ from flask import Blueprint, request
 from app.models import db, Player, Card
 from random import sample
 import json
+from datetime import datetime
 
 game_routes = Blueprint("games", __name__)
 
@@ -67,8 +68,10 @@ def continue_game():
     data = request.json
     card_1 = Card.query.get(data["card_1"])
     card_1.played = False
+    card_1.updated = datetime.now()
     card_2 = Card.query.get(data["card_2"])
     card_2.played = False
+    card_2.updated = datetime.now()
 
     if card_1.value > card_2.value:
         card_1.player_id = 1
