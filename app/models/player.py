@@ -14,5 +14,5 @@ class Player(db.Model):
         return {
             "id": self.id,
             "wins": self.wins,
-            "stack": [card.to_dict() for card in self.stack]
+            "stack": [card.to_dict() for card in self.stack if card.played == False and card.war == False]
         }

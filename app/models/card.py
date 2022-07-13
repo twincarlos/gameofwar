@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from .db import db
+from datetime import datetime
 
 
 class Card(db.Model):
@@ -11,6 +12,7 @@ class Card(db.Model):
     played = db.Column(db.Boolean, nullable=False, default=False)
     war = db.Column(db.Boolean, nullable=False, default=False)
     image = db.Column(db.String, nullable=False)
+    updated = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
     player = db.relationship("Player", back_populates="stack")
 
@@ -19,5 +21,8 @@ class Card(db.Model):
             "id": self.id,
             "player_id": self.player_id,
             "value": self.value,
-            "image": self.image
+            "played": self.played,
+            "war": self.war,
+            "image": self.image,
+            "updated": self.updated
         }

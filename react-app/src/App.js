@@ -16,7 +16,7 @@ function App() {
   }
   
   return (
-    <div>{ game.game_started ? <Game /> : <Home /> }</div>
+    <div>{ game.game_started ? <Game game={game} /> : <Home game={game} /> }</div>
   );
 }
 
