@@ -1,0 +1,57 @@
+#game-main {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: grid;
+    grid-template-rows: 4fr 2fr;
+}
+
+#top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.player {
+    text-align: center;
+}
+
+.card {
+    width: 50%;
+}
+
+#top-left {
+    background-color: aquamarine;
+}
+
+#top-right {
+    background-color: salmon;
+}
+
+#bottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#bottom-left {
+    background-color: salmon;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#war-stack {
+    width: 50%;
+    height: 50%;
+    background-color: red;
+}
+
+#bottom-right {
+    background-color: aquamarine;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

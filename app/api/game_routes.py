@@ -1,5 +1,6 @@
 from flask import Blueprint, request
 from app.models import db, Player, Card
+from random import sample
 
 game_routes = Blueprint("games", __name__)
 
@@ -16,10 +17,29 @@ def get_game_info():
 
     war = Card.query.filter(Card.war is True).all()
 
+    game_started = True
+
+    if len(Card.query.filter(Card.player_id == 3).all()): game_started = False
+
     return {
+        "game_started": game_started,
         "player_1": player_1,
         "player_2": player_2,
         "played_1": played_1,
         "played_2": played_2,
         "war": war
     }
+
+@game_routes.route("/start", methods=["PUT"])
+def start_game():
+    numbers = sample(list(range(1, 53)), 52)
+
+    for i in range(52):
+        card = Card.query.get(numbers[i])
+
+        if i % 2 == 0: card.player_id = 1
+        else: card.player_id = 2
+
+        db.session.commit()
+
+    return ""

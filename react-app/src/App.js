@@ -1,25 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getOneGameInfo } from '../src/store/game';
+import Home from '../src/components/Home';
+import Game from '../src/components/Game';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const game = useSelector(state => state.game);
 
-  useEffect(() => {
-    (async() => {
-      await dispatch(getOneGameInfo()).then(() => setLoaded(true));
-    })();
-  }, [dispatch]);
-
+  useEffect(() => (async() => await dispatch(getOneGameInfo()).then(() => setLoaded(true)))(), [dispatch]);
+  
   if (!loaded) {
     return null;
   }
-
+  
   return (
-    <div>
-      
-    </div>
+    <div>{ game.game_started ? <Game /> : <Home /> }</div>
   );
 }
 
