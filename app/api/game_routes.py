@@ -72,13 +72,24 @@ def continue_game():
     card_2 = Card.query.get(data["card_2"])
     card_2.played = False
     card_2.updated = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    war = Card.query.filter(Card.war == True).all()
 
     if card_1.value > card_2.value:
         card_1.player_id = 1
         card_2.player_id = 1
+        if len(war):
+            for card in war:
+                card.player_id = 1
+                card.war = False
+                card.updated = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     elif card_1.value < card_2.value:
         card_1.player_id = 2
         card_2.player_id = 2
+        if len(war):
+            for card in war:
+                card.player_id = 2
+                card.war = False
+                card.updated = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     else:
         card_1.war = True
         card_2.war = True

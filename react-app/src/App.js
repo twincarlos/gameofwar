@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getOneGameInfo } from '../src/store/game';
 import Home from '../src/components/Home';
 import Game from '../src/components/Game';
+import Winner from './components/Winner';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -16,7 +17,7 @@ function App() {
   }
   
   return (
-    <div>{ game.game_started ? <Game game={game} /> : <Home game={game} /> }</div>
+    <div>{ game.game_started ? ((game.player_1.stack.length === 52 || game.player_2.stack.length === 52) ? <Winner game={game} /> : <Game game={game} />) : <Home /> }</div>
   );
 }
 

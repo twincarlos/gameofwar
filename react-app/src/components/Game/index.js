@@ -23,19 +23,27 @@ function Game({ game }) {
                     <h1>Player 1</h1>
                     <h2>Stack: {game.player_1.stack.length}</h2>
                     <img className="card" src={game.played_1 ? game.played_1.image : CARD_COVER} alt=""></img>
-                    { game.played_1?.value > game.played_2?.value ? <p>Player 1 wins</p> : null }
+                    { game.played_1?.value > game.played_2?.value ? <p>Player 1 wins</p> : (((game.played_1 && game.played_2) && game.played_1?.value === game.played_2?.value) ? <p>It's war!</p> : null) }
                 </div>
                 <div className="player" id="top-right">
                     <h1>Player 2</h1>
                     <h2>Stack: {game.player_2.stack.length}</h2>
                     <img className="card" src={game.played_2 ? game.played_2.image : CARD_COVER} alt=""></img>
-                    {game.played_1?.value < game.played_2?.value ? <p>Player 2 wins</p> : null}
+                    {game.played_1?.value < game.played_2?.value ? <p>Player 2 wins</p> : (((game.played_1 && game.played_2) && game.played_1?.value === game.played_2?.value) ? <p>It's war!</p> : null)}
                 </div>
             </div>
             <div id="bottom">
                 <div id="bottom-left">
                     <div id="war-stack">
-                        {game.war.length}
+                        {
+                            game.war.length ?
+                                <>
+                                    <h1>{game.war.length}</h1>
+                                    <p>Cards on stack</p>
+                                </>
+                            : 
+                            null
+                        }
                     </div>
                 </div>
                 <div id="bottom-right">
